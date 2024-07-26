@@ -1,16 +1,32 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const movieRouter = require("./routes/movieRouter");
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Projects from "./components/Projects";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
-const app = express();
-const port = process.env.PORT || 3000;
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Header />
+        <div class="clouds">
+          <div class="clouds-1"></div>
+          <div class="clouds-2"></div>
+          <div class="clouds-3"></div>
+        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>
+  );
+}
 
-app.use(cors());
-app.use(express.json());
-
-app.use("/movies", movieRouter);
-
-app.listen(port, function() {
-    console.log(`Listening on ${port}`);
-});
+export default App;
